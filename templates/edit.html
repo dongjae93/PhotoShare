@@ -1,0 +1,108 @@
+<head>
+        <title>Eidt</title>
+    
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="/static/hello/css/bootstrap.min.css">
+    
+        <!-- FontAwesome CSS -->
+        <link rel="stylesheet" href="/static/hello/css/font-awesome.min.css">
+    
+        <!-- Styles -->
+        <link rel="stylesheet" href="/static/hello/style.css">
+    </head>
+    <body>
+    <header class="site-header">
+        <div class="site-branding">
+            <h1 class="site-title"><a href="/main" rel="home"><img src="/static/hello/images/logo.png" alt="Logo"></a></h1>
+        </div><!-- .site-branding -->
+    
+        <div class="hamburger-menu">
+            <div class="menu-icon">
+                <img src="/static/hello/images/menu-icon.png" alt="menu icon">
+            </div><!-- .menu-icon -->
+    
+            <div class="menu-close-icon">
+                <img src="/static/hello/images/x.png" alt="menu close icon">
+            </div><!-- .menu-close-icon -->
+        </div><!-- .hamburger-menu -->
+    </header><!-- .site-header -->
+    
+    <nav class="site-navigation flex flex-column justify-content-between">
+        <div class="site-branding d-none d-lg-block ">
+            <h1 class="site-title"><a href="/main" rel="home"><img src="/static/hello/images/logo2.png" alt="Logo"></a></h1>
+        </div><!-- .site-branding -->
+    
+        <ul class="main-menu flex flex-column justify-content-center">
+            <li class="current-menu-item">{{firstname}}</li>
+            
+                <li><a href="/main">Home</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/album">Album</a></li>
+                <li><a href="/photo">My Photo</a></li>
+                <li><a href="/search">Search</a></li>
+                <li><a href="/top">Scoreboard</a></li>
+                <li><a href="/logout">Logout</a></li>
+                <li><a href="/findfriends">Connect</a></li>
+            
+        </ul>
+    
+    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+    </p>
+    
+       
+    </nav><!-- .site-navigation -->
+    
+    <div class="nav-bar-sep d-lg-none"></div>
+    <body>
+            
+        {% if message %}       
+                    <li class="justify-content-center align-items-center" style="color: orangered; margin-left: 200px">
+                        <h1>{{message}}</h1>
+ 
+                        <form method='post' enctype="multipart/form-data" action='/album'>
+                            <input type="text" name="create" placeholder="Album Name">
+                            <div> Create a new album: </div><button class="btn btn-outline-info" type="submit" name="create" placeholder="Create">Create</button>
+                        </form>
+                    </li>
+                    {% endif %}
+
+        <ul class="main-menu flex flex-column justify-content-center">
+                {% if aid %}
+            <form method="post" enctype="multipart/form-data" action="/album/{{aid}}/edit">
+                
+               
+                    <li>Edit your Album!</li>
+                    <li><label for="aname" >Change Album Name:</label></li>
+                    <li><input type="text" name="aname" placeholder=""/></li>
+                    
+                    <li><label for="adate">Change Creation Date: </label></li>
+                    <li><input type="date" name="adate" placeholder="Format: 1111-11-11" /></li>
+                    
+                    <li><button type="submit" name="edit" value="{{aid[0]}}" class="btn btn-info btn-lg">Edit</button></li>
+            </form>
+                {% elif pid %}
+            
+                <form method="post" enctype="multipart/form-data" action="/photo/{{pid}}/edit">
+                    
+                    <li>Edit your Photo!</li>
+                    <li><label for="caption" >Edit caption:</label></li>
+                    <li><input type="text" name="caption" required = "true" /></li>
+                    
+                    <li><label for="tag">Edit Tags(This removes original tags): </label></li>
+                    <li><input type="text" name="tag" required='true' placeholder="Format: dog, cat" /></li>
+                    
+                    <li><button type="submit" name="edit" value="{{pid[0]}}" class="btn btn-info btn-lg">Edit</button></li>
+
+                {% endif %}
+            </form>
+        </ul>
+    </body>
+    <script type='text/javascript' src='/static/hello/js/jquery.js'></script>
+    <script type='text/javascript' src='/static/hello/js/custom.js'></script>
+    </body>

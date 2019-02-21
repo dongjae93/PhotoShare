@@ -1,0 +1,95 @@
+<title>Profile</title>
+    <head>
+    
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="/static/hello/css/bootstrap.min.css">
+    
+        <!-- FontAwesome CSS -->
+        <link rel="stylesheet" href="/static/hello/css/font-awesome.min.css">
+    
+        <!-- Styles -->
+        <link rel="stylesheet" href="/static/hello/style.css">
+    </head>
+    
+    <body>
+        <header class="site-header">
+            <div class="site-branding">
+                <h1 class="site-title"><a href="/main" rel="home"><img src="/static/hello/images/logo.png" alt="Logo"></a></h1>
+            </div><!-- .site-branding -->
+        
+            <div class="hamburger-menu">
+                <div class="menu-icon">
+                    <img src="/static/hello/images/menu-icon.png" alt="menu icon">
+                </div><!-- .menu-icon -->
+        
+                <div class="menu-close-icon">
+                    <img src="/static/hello/images/x.png" alt="menu close icon">
+                </div><!-- .menu-close-icon -->
+            </div><!-- .hamburger-menu -->
+        </header><!-- .site-header -->
+        
+    <nav class="site-navigation flex flex-column justify-content-between">
+        <div class="site-branding d-none d-lg-block ">
+            <h1 class="site-title"><a href="/main" rel="home"><img src="/static/hello/images/logo2.png" alt="Logo"></a></h1>
+        </div><!-- .site-branding -->
+        
+        <ul class="main-menu flex flex-column justify-content-center">
+            
+    
+            <li class="current-menu-item">{{firstname}}</li>
+            {% if lastname != 'Guest'  %}
+            <li><a href="/main">Home</a></li>
+            <li class="current-menu-item"><a href="/profile">Profile</a></li>
+            <li><a href="/album">Album</a></li>
+            <li><a href="/photo">My Photo</a></li>
+            <li><a href="/search">Search</a></li>
+            <li><a href="/top">Scoreboard</a></li>
+            <li><a href="/findfriends">Connect</a></li>
+            <li><a href="/upload">Upload</a></li>
+            <li><a href="/logout">Logout</a></li>
+
+                {% endif %}
+        </ul>
+    
+        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+    </p>
+    </nav><!-- .site-navigation -->
+    
+    <div class="nav-bar-sep d-lg-none"></div>
+    <br/>
+    {% if message %}
+        <div style="margin-left: 150px">{{message}}</div>
+    {% endif %}
+    <br/>
+    <br/>
+    <ul class="main-menu flex flex-column justify-content-center" >
+            <li><img src='data:image/png;base64, {{profile_Image}}' alt="" height="250px" width="250px"></li>
+            <li>Name: {{firstname}}   {{lastname}}   Birthday: {{dob}}</li>
+            <li> Email: {{email}}  Hometown: {{Hometown}} Gender: {{gender}}</li>
+            <li>bio: {{bio}}</li>
+        
+            <form method="POST" enctype="multipart/form-data" action="/profile">
+                <li><label for="profile">Upload/Change your profile Picture</label>
+                <input type="file" name="profile"/><br/>
+                <input type="submit" value="Upload"></li>
+            </form>
+         
+               <li><a href="/findfriends">Find for friends!</a></li>
+              
+            
+    </ul>
+    <div class="scroll-down flex flex-column justify-content-center align-items-center d-none d-lg-block">
+            <span class="arrow-down flex justify-content-center align-items-center"><img src="/static/hello/images/arrow-down.png" alt="arrow"></span>
+            <span class="scroll-text">Scroll Down</span>
+        </div><!-- .scroll-down -->
+        
+        <script type='text/javascript' src='/static/hello/js/jquery.js'></script>
+        <script type='text/javascript' src='/static/hello/js/custom.js'></script>
+        
+        </body>

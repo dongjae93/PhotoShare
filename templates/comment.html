@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <title>Comment</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/hello/css/bootstrap.min.css">
+
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="/static/hello/css/font-awesome.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/static/hello/style.css">
+
+
+<header class="site-header">
+    <div class="site-branding">
+        <h1 class="site-title"><a href="/main" rel="home"><img src="/static/hello/images/logo.png" alt="Logo"></a></h1>
+    </div><!-- .site-branding -->
+
+    <div class="hamburger-menu">
+        <div class="menu-icon">
+            <img src="/static/hello/images/menu-icon.png" alt="menu icon">
+        </div><!-- .menu-icon -->
+
+        <div class="menu-close-icon">
+            <img src="/static/hello/images/x.png" alt="menu close icon">
+        </div><!-- .menu-close-icon -->
+    </div><!-- .hamburger-menu -->
+</header><!-- .site-header -->
+
+<nav class="site-navigation flex flex-column justify-content-between">
+    <div class="site-branding d-none d-lg-block ">
+        <h1 class="site-title"><a href="/main" rel="home"><img src="/static/hello/images/logo2.png" alt="Logo"></a></h1>
+    </div><!-- .site-branding -->
+
+    <ul class="main-menu flex flex-column justify-content-center">
+            <li class="current-menu-item">{{firstname}}</li>
+            {% if lastname != 'Guest'  %}
+            <li><a href="/main">Home</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/album">Album</a></li>
+            <li class="current-menu-item"><a href="/photo">My Photo</a></li>
+            <li><a href="/search">Search</a></li>
+            <li><a href="/top">Scoreboard</a></li>
+            <li><a href="/findfriends">Connect</a></li>
+            <li><a href="/upload">Upload</a></li>
+            <li><a href="/logout">Logout</a></li>
+            {% else %}
+                <li><a href="/main">Home</a></li>
+                <li><a href="/album">Album</a></li>
+                <li class="current-menu-item"><a href="/photo">Photo</a></li>
+                <li><a href="/search">Search</a></li>
+                <li><a href="/top">Scoreboard</a></li>
+                <li><a href="/logout">Login</a></li>
+                <li><a href="/register/">Sign Up</a></li>
+            {% endif %}
+    </ul>
+
+    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+</p>
+
+
+    <div class="social-profiles">
+        <ul class="flex justify-content-start justify-content-lg-center align-items-center">
+            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+        </ul>
+    </div><!-- .social-profiles -->
+</nav><!-- .site-navigation -->
+
+<div class="nav-bar-sep d-lg-none"></div>
+
+<div class="outer-container">
+    <div class="single-post">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <ul class="breadcrumbs flex align-items-center">
+                        <li><a href=/main>Home</a></li>
+                        <li>{{owner[0]}}</li>
+                        <li>{{albuminfo[1]}}</li>
+                    </ul><!-- .breadcrumbs -->
+                </div><!-- .col -->
+            </div><!-- .row -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="featured-img">
+                        <figure>
+                            <img src='data:image/png;base64, {{photo[1]}}'>
+                        </figure>
+                    </div><!-- .content-area -->
+                </div><!-- .col -->
+
+                <div class="col-12 col-lg-8">
+                    <div class="content-area">
+                        <header class="entry-header">
+                            <div class="post-meta">
+                                <a href="/photo/{{photo[0]}}/likes"><button name="like" class="btn btn-outline-primary">Like: {{photo[4]}}</button></a>
+                            </div><!-- .meta-post -->
+
+                            <h1>{{albuminfo[1]}}</h1>
+
+                            <span class="byline">by <span class="author"><a href="#">{{owner[0]}}</a></span></span>
+                        </header><!-- .entry-header -->
+
+                        <div class="entry-content">
+                            <p >Caption: </p> 
+                            <p style="color: grey">{{photo[2]}} </p>
+
+                        </div><!-- .entry-content -->
+                    </div><!-- .content-area -->
+                </div><!-- .col-12 -->
+
+                <aside class="col-12 col-lg-3 offset-lg-1">
+                    <div class="entry-meta">
+                        <div class="posted-date">
+                            <label>Album Date</label>
+
+                            <span class="date-format"><a href="/photo/{{albuminfo[0]}}">{{albuminfo[2]}}</a></span>
+                        </div><!-- .posted-date -->
+
+                        <div class="post-category">
+                            <label>Category</label>
+                            <span><a href="/photo">Photography</a></span>
+                        </div><!-- .post-category -->
+
+                        <div class="posted-tags">
+                            <label>tags</label>
+                            <span>
+                                {% for tag in tags %}
+                                    {% if tag[1] == photo[0] %}
+                                        <a href='/photo/{{tag[0]}}/viewall#start'>{{tag[0]}}</a>
+                                    {% endif %}
+                                {% endfor %}
+                            </span>
+                        </div><!-- .entry-meta -->
+
+                        <div class="post-share">
+                            <label>share</label>
+                            <ul>
+                                <li class="fb"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li class="gp"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li class="in"><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                <li class="tw"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            </ul>
+                        </div><!-- .post-share -->
+                    </div><!-- .entry-meta -->
+                </aside><!-- .col-md-3 -->
+
+                <div class="col-12 col-lg-7">
+                    <div class="content-area">
+                        <div class="post-comments">
+                            <h3 class="comments-title"><span class="comments-number">Comments</span></h3>
+                            
+                            {% for comment in comments %}
+                                <ol class="comment-list">
+                                    <li class="comment">
+                                        <article class="comment-body">
+                                            <figure class="comment-author-avatar">
+                                                <img src='data:image/png;base64, {{comment[5]}}' alt="commenterpic">
+                                            </figure><!-- .comment-author-avatar -->
+
+                                            <div class="comment-wrap">
+                                                <div class="comment-author">
+                                                    <span class="fn">
+                                                        <a href="#">{{comment[4]}}</a>
+                                                    </span><!-- .fn -->
+
+                                                    <span class="comment-meta">
+                                                        <a href="#">{{comment[3]}}</a>
+                                                    </span><!-- .comment-meta -->
+                                                </div><!-- .comment-author -->
+
+                                                <p>{{comment[2]}}</p>
+
+                                               
+                                            </div><!-- .comment-wrap -->
+
+                                            <div class="clearfix"></div>
+                                        </article><!-- .comment-body -->
+                                    </li><!-- .comment -->
+                                </ol><!-- .comment-list -->
+                                {% endfor %}
+                        </div><!-- .post-comments -->
+                        {% if ownerid != uid %}
+                        <div class="comments-form">
+                            <div class="comment-respond">
+                                <h3 class="comment-reply-title">Leave a comment</h3>
+
+                                <form method = 'POST' enctype="multipart/form-data" class="comment-form">
+                                    <textarea rows="4" name = "comment" placeholder="Comment"></textarea>
+                                    <input type="submit" name="comment1">
+                                </form><!-- .comment-form -->
+                            </div><!-- .comment-respond -->
+                        </div><!-- .comments-form -->
+                        {% endif %}
+                    </div><!-- .content-area -->
+                </div><!-- .col-12 -->
+            </div><!-- .row -->
+        </div><!-- .container -->
+    </div><!-- .single-post -->
+</div><!-- .outer-container -->
+
+<script type='text/javascript' src='/static/hello/js/jquery.js'></script>
+<script type='text/javascript' src='/static/hello/js/custom.js'></script>
+</html>

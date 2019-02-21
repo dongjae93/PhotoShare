@@ -1,0 +1,94 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="/static/hello/css/bootstrap.min.css">
+
+<!-- FontAwesome CSS -->
+<link rel="stylesheet" href="/static/hello/css/font-awesome.min.css">
+
+<!-- Styles -->
+<link rel="stylesheet" href="/static/hello/style.css">
+<title>Likes</title>
+<body>
+        <header class="site-header">
+            <div class="site-branding">
+                <h1 class="site-title"><a href="/main" rel="home"><img src="/static/hello/images/logo.png" alt="Logo"></a></h1>
+            </div><!-- .site-branding -->
+        
+            <div class="hamburger-menu">
+                <div class="menu-icon">
+                    <img src="/static/hello/images/menu-icon.png" alt="menu icon">
+                </div><!-- .menu-icon -->
+        
+                <div class="menu-close-icon">
+                    <img src="/static/hello/images/x.png" alt="menu close icon">
+                </div><!-- .menu-close-icon -->
+            </div><!-- .hamburger-menu -->
+        </header><!-- .site-header -->
+        
+        <nav class="site-navigation flex flex-column justify-content-between">
+            <div class="site-branding d-none d-lg-block ">
+                <h1 class="site-title"><a href="/main" rel="home"><img src="/static/hello/images/logo2.png" alt="Logo"></a></h1>
+            </div><!-- .site-branding -->
+            
+            <ul class="main-menu flex flex-column justify-content-center">
+                
+        
+                <li class="current-menu-item">{{firstname}}</li>
+                {% if lastname != 'Guest'  %}
+                <li><a href="/main">Home</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/album">Album</a></li>
+                <li class="current-menu-item"><a href="/photo">My Photo</a></li>
+                <li><a href="/search">Search</a></li>
+                <li><a href="/top">Scoreboard</a></li>
+                <li><a href="/findfriends">Connect</a></li>
+                <li><a href="/upload">Upload</a></li>
+                <li><a href="/logout">Logout</a></li>
+                {% else %}
+                    <li><a href="/main">Home</a></li>
+                    <li><a href="/album">Album</a></li>
+                    <li><a href="/photo">Photo</a></li>
+                    <li><a href="/search">Search</a></li>
+                    <li class="current-menu-item"><a href="/top">Scoreboard</a></li>
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/register/">Sign Up</a></li>
+                {% endif %}
+            </ul>
+        
+            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        </p>
+        </nav><!-- .site-navigation -->
+        
+        <div class="nav-bar-sep d-lg-none"></div>
+
+
+        <h1 style="margin-left: 700px; color: #f568a2">People Who Like This Photo</h1>
+
+        <table class="table" style="margin-top: 50px">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col" style="color: rgb(71, 132, 245)">First Name</th>
+                    <th scope="col" style="color:rgb(247, 146, 63)">Last Name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for likelist in likelists %}
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>{{likelist[0]}}</td>
+                    <td>{{likelist[1]}}</td>
+                  </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+
+
+
+    <script type='text/javascript' src='/static/hello/js/jquery.js'></script>
+    <script type='text/javascript' src='/static/hello/js/custom.js'></script>
+</body>

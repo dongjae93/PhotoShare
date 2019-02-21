@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Photos</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/hello/css/bootstrap.min.css">
+
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="/static/hello/css/font-awesome.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/static/hello/style.css">
+</head>
+<body>
+<header class="site-header">
+    <div class="site-branding">
+        <h1 class="site-title"><a href="/main" rel="home"><img src="/static/hello/images/logo.png" alt="Logo"></a></h1>
+    </div><!-- .site-branding -->
+
+    <div class="hamburger-menu">
+        <div class="menu-icon">
+            <img src="/static/hello/images/menu-icon.png" alt="menu icon">
+        </div><!-- .menu-icon -->
+
+        <div class="menu-close-icon">
+            <img src="/static/hello/images/x.png" alt="menu close icon">
+        </div><!-- .menu-close-icon -->
+    </div><!-- .hamburger-menu -->
+</header><!-- .site-header -->
+
+<nav class="site-navigation flex flex-column justify-content-between">
+    <div class="site-branding d-none d-lg-block ">
+        <h1 class="site-title"><a href="/main" rel="home"><img src="/static/hello/images/logo2.png" alt="Logo"></a></h1>
+    </div><!-- .site-branding -->
+
+    <ul class="main-menu flex flex-column justify-content-center">
+        <li class="current-menu-item">{{firstname}}</li>
+        {% if lastname != 'Guest'  %}
+            <li><a href="/main">Home</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/album">Album</a></li>
+            <li class="current-menu-item"><a href="/photo">My Photo</a></li>
+            <li><a href="/search">Search</a></li>
+            <li><a href="/top">Scoreboard</a></li>
+            <li><a href="/findfriends">Connect</a></li>
+            <li><a href="/upload">Upload</a></li>
+            <li><a href="/logout">Logout</a></li>
+        {% else %}
+            <li><a href="/main">Home</a></li>
+            <li><a href="/album">Album</a></li>
+            <li class="current-menu-item"><a href="/photo">Photos</a></li>
+            <li><a href="/search">Search</a></li>
+            <li><a href="/top">Scoreboard</a></li>
+            <li><a href="/logout">Login</a></li>
+            <li><a href="/register/">Sign Up</a></li>
+        {% endif %}
+    </ul>
+
+<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+</p>
+
+   
+</nav><!-- .site-navigation -->
+
+<div class="nav-bar-sep d-lg-none"></div>
+
+
+<div class="outer-container">
+    <div class="container portfolio-page">
+        <div class="row">
+            <div class="col">
+                <ul class="breadcrumbs flex align-items-center">
+                    <li><a href="/main">Home</a></li>
+                    {% if lastname != 'Guest' %}
+                    <li>{{firstname}}'s photos!</li>
+                    {% endif %}
+                </ul><!-- .breadcrumbs -->
+                
+            </div><!-- .col -->
+        </div><!-- .row -->
+        
+        
+        <ul class="main-menu flex flex-column justify-content-center">
+            {% if lastname != 'Guest' %}
+            <li><a href="/upload">Upload a photo</a></li>
+            <br/>
+            <li><a href="/photo/{{uid}}/mayalsolike#start">You May Also Like</a></li>
+            <br/>
+                {% if viewall %}
+                    <li>My Photos with <a href="/photo/{{ttitle}}#start">#{{ttitle}}</a></li> 
+                {% endif %}
+                {% if ttitle %}
+                    <li>View All Photos with <a href="/photo/{{ttitle}}/viewall#start">#{{ttitle}}</a></li>   
+                {% endif %}
+            {% endif %}
+            <li>Browse Photos <a href="#start"> Below</a></li>
+            {% if atitle %}
+                <li class="current-menu-item" style="color: #f568a2">{{atitle}}</li>
+            {% endif %}
+        </ul>
+       
+
+        <div class="row">
+           
+                {% if photos %}
+                        
+                        {% for photo in photos %}
+                        <!-- pid, data, caption, aid, likes -->
+                            <div class="col-12 col-md-6 col-lg-3" style="margin-top: 100px">
+                                <div class="portfolio-content" style="width:300px;height:300px;">
+                                    <figure id="start">
+                                        <a href="/photo/{{photo[0]}}/comment"><img src='data:imge/png;base64, {{photo[1]}}' alt="" style="width:300px;height:300px;" ></a>
+                                    </figure> 
+
+                                    <div class="entry-content flex flex-column align-items-center justify-content-center">
+                                            {% for album in albums %}
+                                                
+                                                {% if album[0] == photo[3] %}
+                                            <!-- <li><button style="background-color: white" type="submit" name="clickedAlbum" value={{album[0]}}>Album: {{album[1]}}</button></li> -->
+                                                    <h3><a href="/photo/{{album[0]}}">{{album[1]}}</a></h3>
+                                                {% endif %}
+                                            {% endfor %}
+
+                                        <ul class="flex flex-wrap justify-content-center" style="width:300px;height:300px;">
+                                            <li>{{photo[2]}}<br/></li>
+                                            <form method="post" enctype="multipart/form-data" action='/photo'>
+                                            {% if tags %}
+                                                {% for tag in tags %}
+                                                    {% if tag[1] == photo[0] %}
+                                                    <li><a href="/photo/{{tag[0]}}/viewall#start">#{{tag[0]}}</a></li>
+                                                    <!-- <button name="clickedTag" value="{{tag[0]}}" type="submit">tags: {{tag[0]}}</button> -->
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endif %}
+                                            </form>
+                                        </ul>   
+                                    </div><!-- .entry-content -->
+                                    
+                                </div><!-- .portfolio-content -->
+                                <form method="POST" enctype="multipart/form-data" action="/photo/{{photo[0]}}/comment">
+                                    <button type="submit" name="like" value="{{photo[0]}}" class="btn btn-outline-primary">Like: {{photo[4]}}</button>
+                                    <a href="/photo/{{photo[0]}}/comment"><button type="button" name="comment" value="{{photo[0]}}" class="btn btn-outline-warning">Comment</button></a>
+                                </form>
+                                
+
+                                
+                                
+                                    {% if lastname != 'Guest' %}
+                                        {% if uid == photo[5] %}                           
+                                <form method="POST" enctype="multipart/form-data" action="/photo">
+                                    <button type="submit" name="delete" value="{{photo[0]}}" class="btn btn-outline-secondary">Delete</button>
+                                    <a href="/photo/{{photo[0]}}/edit"><button type="button" name="edit" value="{{photo[0]}}" class="btn btn-outline-info">Edit</button></a>                                        
+                                </form>
+                                        {% endif %}
+                                    {% endif %}
+                            </div><!-- .col -->
+                        {% endfor %}
+
+                    {% else %}
+                                
+                        {% for photo in photos %}
+                        <!-- pid, data, caption, aid, likes -->
+                            <div class="col-12 col-md-6 col-lg-3">
+                                <div class="portfolio-content" style="width:300px;height:300px;">
+                                    <figure>
+                                        <a href="/photo/{{photo[0]}}/comment"><img src='data:image/png;base64, {{photo[1]}}' alt="" style="width:300px;height:300px;"></a>
+                                    </figure> 
+
+                                    <div class="entry-content flex flex-column align-items-center justify-content-center">
+                                            {% for album in albums %}
+                                                
+                                            {% if album[0] == photo[3] %}
+                                        <!-- <li><button style="background-color: white" type="submit" name="clickedAlbum" value={{album[0]}}>Album: {{album[1]}}</button></li> -->
+                                                <h3><a href="/photo/{{album[0]}}">Album: {{album[1]}}</a></h3>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                        <ul class="flex flex-wrap justify-content-center" style="width:300px;height:300px;">
+                                            <li>{{photo[2]}}<br/></li>
+                                            <form method="post" enctype="multipart/form-data" action='/photo'>
+                                            
+                                                
+                                                {% if tags %}
+                                                {% for tag in tags %}
+                                                    {% if tag[1] == photo[0] %}
+                                                    <li><a href="/photo/{{tag[0]}}/viewall#start">#{{tag[0]}}</a></li>
+                                                    <!-- <button name="clickedTag" value="{{tag[0]}}" type="submit">tags: {{tag[0]}}</button> -->
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endif %}
+                                                </form>
+                                               
+                                        </ul>   
+                                    </div><!-- .entry-content -->
+                                    
+                                </div><!-- .portfolio-content -->
+                                <form method="POST" enctype="multipart/form-data" action="/photo/{{photo[0]}}/comment">
+                                    <button type="submit" name="like" value="{{photo[0]}}" class="btn btn-outline-primary">Like, {{photo[4]}}</button>
+                                    <br/>
+                                    <input type="text" class="form-control" name="comment">
+                                    <button type="submit" value="{{photo[0]}}" name="comment" class="btn btn-outline-info">Comment</button>
+                                    {% if lastname != 'Guest' %}
+                                    <button type="submit" name="delete" value="{{photo[0]}}">Delete Photo</button>
+                                    {% endif %}
+                                    <br/>
+                                </form>
+                            </div><!-- .col -->
+                        {% endfor %}
+                    
+                {% endif %}
+        
+
+        </div><!-- .row -->
+
+        <div class="scroll-down flex flex-column justify-content-center align-items-center d-none d-lg-block">
+            <span class="arrow-down flex justify-content-center align-items-center"><img src="/static/hello/images/arrow-down.png" alt="arrow"></span>
+            <span class="scroll-text">Scroll Down</span>
+        </div><!-- .scroll-down -->
+    </div><!-- .container -->
+</div><!-- .outer-container -->
+
+<script type='text/javascript' src='/static/hello/js/jquery.js'></script>
+<script type='text/javascript' src='/static/hello/js/custom.js'></script>
+
+</body>
+</html>

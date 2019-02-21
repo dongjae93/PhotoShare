@@ -1,0 +1,113 @@
+
+<html>
+    <head>
+        <title>Main</title>
+    
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="/static/hello/css/bootstrap.min.css">
+    
+        <!-- FontAwesome CSS -->
+        <link rel="stylesheet" href="/static/hello/css/font-awesome.min.css">
+    
+        <!-- Styles -->
+        <link rel="stylesheet" href="/static/hello/style.css">
+    </head>
+    <body>
+    <header class="site-header">
+        <div class="site-branding">
+            <h1 class="site-title"><a href="/main" rel="home"><img src="/static/hello/images/logo.png" alt="Logo"></a></h1>
+        </div><!-- .site-branding -->
+    
+        <div class="hamburger-menu">
+            <div class="menu-icon">
+                <img src="/static/hello/images/menu-icon.png" alt="menu icon">
+            </div><!-- .menu-icon -->
+    
+            <div class="menu-close-icon">
+                <img src="/static/hello/images/x.png" alt="menu close icon">
+            </div><!-- .menu-close-icon -->
+        </div><!-- .hamburger-menu -->
+    </header><!-- .site-header -->
+    
+    <nav class="site-navigation flex flex-column justify-content-between">
+        <div class="site-branding d-none d-lg-block ">
+            <h1 class="site-title"><a href="/main" rel="home"><img src="/static/hello/images/logo2.png" alt="Logo"></a></h1>
+        </div><!-- .site-branding -->
+        
+        <ul class="main-menu flex flex-column justify-content-center">
+            
+    
+            <li class="current-menu-item">{{firstname}}</li>
+
+            <li><a href="/main">Home</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/album">Album</a></li>
+            <li><a href="/photo">My Photo</a></li>
+            <li><a href="/search">Search</a></li>
+            <li><a href="/top">Scoreboard</a></li>
+            <li class="current-menu-item"><a href="/findfriends">Connect</a></li>
+            <li><a href="/upload">Upload</a></li>
+            <li><a href="/logout">Logout</a></li>
+     
+        </ul>
+    
+        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+    </p>
+    </nav><!-- .site-navigation -->
+    
+    <div class="nav-bar-sep d-lg-none"></div>
+   
+   
+
+   
+    
+    <ul class="main-menu flex flex-column justify-content-center">
+            <li><a href="/findfriends/{{uid}}">See your friends</a></li>
+            <li>Search Your Friend!</li>
+            <li>Either enter their email or lastname</li>
+            <li style="color: #f568a2">{{message}}</li>
+      
+      <!-- Create a form to pass information -->
+      <form method="POST" action="/findfriends" > <!-- action is where to send information -->
+        <li> Email:        <input type="email" name="email" /> </li>
+        <li><button type="submit" name="email" placeholder="Search">Search</button></li>
+ 
+        
+      
+        <li> Lastname:         <input type="text" name="lastname" /></li>
+        <li><button type="submit" name="lastname" placeholder="Search">Search</button></li> <!-- Execute the action -->
+  
+        {% if users %}
+            {% for user in users %}
+                <li><img src='data:image/png;base64, {{user[5]}}' alt="" height="250px" width="250px"></li>
+                <li style="color: orchid ">Name: {{user[2]}}  {{user[3]}} Email: {{user[1]}} Birthday: {{user[4]}} bio: {{user[6]}} hometown: {{user[7]}} gender: {{user[8]}}</li>
+                
+                <li><button type="submit" name="follow" value="{{user[0]}}">Follow</button></li>
+ 
+            {% endfor %}
+        {% endif %}
+      </form>
+
+
+    </ul>
+    </body>
+
+
+
+
+
+
+
+
+
+    <script type='text/javascript' src='/static/hello/js/jquery.js'></script>
+<script type='text/javascript' src='/static/hello/js/custom.js'></script>
+
+</body>
+  </html>
